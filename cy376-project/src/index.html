@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Cove Logistics — Freight Forwarding &amp; Warehousing</title>
+<meta name="description" content="Meridian Cove Logistics (MCL) — freight forwarding, customs clearance, and contract warehousing across West Africa and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0F2436;
+    --ink-2: #16202B;
+    --orange: #C1560E;
+    --steel: #5B6B76;
+    --paper: #F2EFE9;
+    --paper-2: #E8E3D8;
+    --green: #3F6B4F;
+    --line: rgba(15,36,54,0.12);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-2);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---- Manifest ticker ---- */
+  .ticker-bar{
+    background:var(--ink);
+    color:var(--paper);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid rgba(242,239,233,0.15);
+  }
+  .ticker-track{
+    display:inline-block;
+    padding-left:100%;
+    animation: ticker 38s linear infinite;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    padding-top:8px;
+    padding-bottom:8px;
+  }
+  .ticker-track span{ margin-right:48px; color:rgba(242,239,233,0.75); }
+  .ticker-track span b{ color:var(--orange); font-weight:500; }
+  @keyframes ticker{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation:none; padding-left:24px; }
+  }
+
+  /* ---- Nav ---- */
+  header.site{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:19px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .logo-mark{
+    width:20px;height:20px;
+    background:var(--orange);
+    clip-path:polygon(0 20%,50% 0,100% 20%,100% 80%,50% 100%,0 80%);
+    flex:none;
+  }
+  nav ul{
+    list-style:none; display:flex; gap:32px; margin:0; padding:0;
+    font-size:14.5px; font-weight:500;
+  }
+  nav ul a{ text-decoration:none; color:var(--steel); }
+  nav ul a:hover{ color:var(--orange); }
+  .nav-cta{
+    background:var(--ink); color:var(--paper) !important;
+    padding:9px 18px; border-radius:var(--radius);
+    font-size:13.5px; font-weight:500;
+  }
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--orange);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--orange);
+  }
+  .hero h1{
+    font-size:clamp(34px,5vw,58px);
+    font-weight:700;
+    margin:0 0 22px;
+    max-width:15ch;
+    color:var(--ink);
+  }
+  .hero p.lead{
+    font-size:18px;
+    color:var(--steel);
+    max-width:56ch;
+    margin:0 0 34px;
+  }
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-block;
+    padding:13px 24px;
+    border-radius:var(--radius);
+    font-weight:500;
+    font-size:14.5px;
+    text-decoration:none;
+    border:1px solid var(--ink);
+  }
+  .btn-primary{ background:var(--ink); color:var(--paper); }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+
+  /* ---- Route map (signature element) ---- */
+  .route-section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  .route-map{
+    position:relative;
+    padding:50px 0 30px;
+  }
+  .route-line{
+    position:relative;
+    height:2px;
+    background:repeating-linear-gradient(to right, var(--steel) 0 6px, transparent 6px 12px);
+    margin:0 4%;
+  }
+  .vessel{
+    position:absolute;
+    top:-6px;
+    width:14px; height:14px;
+    background:var(--orange);
+    border-radius:50%;
+    box-shadow:0 0 0 4px rgba(193,86,14,0.15);
+    animation: sail 9s ease-in-out infinite;
+  }
+  @keyframes sail{
+    0%,100%{ left:0%; }
+    50%{ left:calc(100% - 14px); }
+  }
+  @media (prefers-reduced-motion: reduce){ .vessel{ animation:none; left:38%; } }
+  .stops{
+    display:flex; justify-content:space-between;
+    margin:0 4%;
+  }
+  .stop{ text-align:center; max-width:160px; }
+  .stop-dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--ink);
+    margin:0 auto 12px;
+    position:relative; top:-59px;
+  }
+  .stop b{
+    display:block; font-family:'Space Grotesk',sans-serif;
+    font-size:15px; color:var(--ink); margin-bottom:4px;
+  }
+  .stop span{ font-size:13px; color:var(--steel); }
+
+  /* ---- Sections generic ---- */
+  section.block{ padding:72px 0; border-bottom:1px solid var(--line); }
+  .block h2{ font-size:30px; color:var(--ink); margin:0 0 8px; }
+  .block .sub{ color:var(--steel); max-width:60ch; margin:0 0 40px; }
+
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+  @media (max-width:820px){ .grid-3, .grid-2{ grid-template-columns:1fr; } }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:26px;
+    border-radius:var(--radius);
+  }
+  .card .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--green);
+    background:rgba(63,107,79,0.1);
+    padding:3px 8px;
+    border-radius:2px;
+    display:inline-block;
+    margin-bottom:14px;
+  }
+  .card h3{ font-size:18px; margin:0 0 10px; color:var(--ink); }
+  .card p{ font-size:14.5px; color:var(--steel); margin:0; }
+
+  /* team */
+  .person{
+    display:flex; gap:16px; align-items:flex-start;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .person:last-child{ border-bottom:none; }
+  .avatar{
+    width:46px;height:46px; border-radius:50%;
+    background:var(--paper-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:600;
+    color:var(--ink); flex:none; font-size:15px;
+  }
+  .person .name{ font-weight:600; color:var(--ink); font-size:15.5px; }
+  .person .role{ font-size:13.5px; color:var(--orange); margin-bottom:4px; font-family:'IBM Plex Mono',monospace; }
+  .person .email{ font-size:13px; color:var(--steel); font-family:'IBM Plex Mono',monospace; }
+
+  /* careers */
+  .job{
+    padding:22px 0; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:flex-start; gap:20px;
+    flex-wrap:wrap;
+  }
+  .job:last-child{ border-bottom:none; }
+  .job h3{ margin:0 0 6px; font-size:17px; color:var(--ink); }
+  .job .meta{ font-size:13px; color:var(--steel); font-family:'IBM Plex Mono',monospace; }
+  .job .stack{ font-size:13.5px; color:var(--steel); margin-top:8px; max-width:60ch; }
+
+  footer{
+    padding:48px 0 40px;
+    font-size:13.5px;
+    color:var(--steel);
+  }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  footer .mono{ color:var(--steel); }
+</style>
+</head>
+<body>
+
+<div class="ticker-bar">
+  <div class="ticker-track mono">
+    <span>MANIFEST <b>MCL-88214</b> · TEMA → ROTTERDAM · STATUS: <b>CLEARED CUSTOMS</b></span>
+    <span>MANIFEST <b>MCL-88219</b> · TAKORADI → SHANGHAI · STATUS: <b>IN TRANSIT</b></span>
+    <span>MANIFEST <b>MCL-88231</b> · ACCRA HQ → LAGOS · STATUS: <b>LOADING</b></span>
+    <span>MANIFEST <b>MCL-88240</b> · TEMA → ANTWERP · STATUS: <b>SCHEDULED</b></span>
+    <span>MANIFEST <b>MCL-88214</b> · TEMA → ROTTERDAM · STATUS: <b>CLEARED CUSTOMS</b></span>
+    <span>MANIFEST <b>MCL-88219</b> · TAKORADI → SHANGHAI · STATUS: <b>IN TRANSIT</b></span>
+  </div>
+</div>
+
+<header class="site">
+  <nav>
+    <a href="#top" class="logo"><span class="logo-mark"></span>Meridian Cove</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="eyebrow">Freight forwarding · Est. 2014</div>
+    <h1>Cargo that clears, moves, and lands on schedule.</h1>
+    <p class="lead">Meridian Cove Logistics handles freight forwarding, customs clearance, and contract warehousing for shippers moving goods through West Africa and onward to global markets.</p>
+    <div class="btn-row">
+      <a href="#services" class="btn btn-primary">Our services</a>
+      <a href="#contact" class="btn btn-ghost">Get a quote</a>
+    </div>
+  </section>
+
+  <section class="route-section wrap" id="about">
+    <div class="eyebrow">Network</div>
+    <h2 style="color:var(--ink); font-size:24px; margin:0 0 6px;">Three offices, one manifest system</h2>
+    <p class="sub" style="margin-bottom:0;">Every shipment is tracked from origin to customs clearance across our regional offices.</p>
+    <div class="route-map">
+      <div class="stops">
+        <div class="stop"><span class="stop-dot"></span><b>Accra HQ</b><span>Operations &amp; finance</span></div>
+        <div class="stop"><span class="stop-dot"></span><b>Tema Port Office</b><span>Container freight</span></div>
+        <div class="stop"><span class="stop-dot"></span><b>Takoradi Office</b><span>Bulk &amp; break-bulk cargo</span></div>
+      </div>
+      <div class="route-line"><div class="vessel"></div></div>
+    </div>
+    <p style="margin-top:8px;">
+      <a href="/MCL_2025_Sustainability_Brochure.pdf" style="color:var(--orange); font-weight:500; text-decoration:none; font-size:14.5px;">
+        &darr; Download our 2025 Operations &amp; Sustainability Brochure (PDF)
+      </a>
+    </p>
+  </section>
+
+  <section class="block wrap" id="services">
+    <div class="eyebrow">TEMA – ROTTERDAM</div>
+    <h2>What we move, and how</h2>
+    <p class="sub">Three service lines, built around the paperwork and physical handling that actually gets a container from a warehouse floor onto a vessel.</p>
+    <div class="grid-3">
+      <div class="card">
+        <span class="tag">SEA &amp; AIR</span>
+        <h3>Freight Forwarding</h3>
+        <p>FCL and LCL ocean freight, air freight for time-sensitive cargo, and booking across our carrier partnerships.</p>
+      </div>
+      <div class="card">
+        <span class="tag">CUSTOMS</span>
+        <h3>Clearance &amp; Compliance</h3>
+        <p>Import/export documentation, HS code classification, and clearance handling at Tema and Takoradi ports.</p>
+      </div>
+      <div class="card">
+        <span class="tag">STORAGE</span>
+        <h3>Contract Warehousing</h3>
+        <p>Bonded and general warehousing with inventory tracking for clients who need storage between legs of a shipment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="team">
+    <div class="eyebrow">ACCRA – HQ</div>
+    <h2>Who runs the manifest</h2>
+    <p class="sub">The team behind day-to-day operations. Reach any department directly using the addresses below.</p>
+    <div class="grid-2">
+      <div>
+        <div class="person">
+          <div class="avatar">KM</div>
+          <div>
+            <div class="name">Kwame Mensah</div>
+            <div class="role">Operations Director</div>
+            <div class="email">kwame.mensah@meridiancovelogistics.com</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar">AO</div>
+          <div>
+            <div class="name">Abena Osei</div>
+            <div class="role">IT Manager</div>
+            <div class="email">abena.osei@meridiancovelogistics.com</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar">SB</div>
+          <div>
+            <div class="name">Samuel Boateng</div>
+            <div class="role">Finance Controller</div>
+            <div class="email">samuel.boateng@meridiancovelogistics.com</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="person">
+          <div class="avatar">LO</div>
+          <div>
+            <div class="name">Linda Owusu</div>
+            <div class="role">Head of HR</div>
+            <div class="email">linda.owusu@meridiancovelogistics.com</div>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar">GA</div>
+          <div>
+            <div class="name">Grace Adjei</div>
+            <div class="role">Customer Success Lead</div>
+            <div class="email">grace.adjei@meridiancovelogistics.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="careers">
+    <div class="eyebrow">TAKORADI – WAREHOUSE</div>
+    <h2>Open roles</h2>
+    <p class="sub">We're hiring across operations and IT as the Takoradi warehouse expands.</p>
+
+    <div class="job">
+      <div>
+        <h3>Network &amp; Systems Administrator</h3>
+        <div class="meta">ACCRA HQ · FULL-TIME</div>
+        <div class="stack">You'll manage our on-prem infrastructure: Windows Server/Active Directory, our Cisco ASA firewall pair, VMware vSphere hosts, and the Microsoft 365 tenant. Familiarity with our warehouse management system (WMS) integration a plus.</div>
+      </div>
+    </div>
+    <div class="job">
+      <div>
+        <h3>Customs Documentation Officer</h3>
+        <div class="meta">TEMA PORT OFFICE · FULL-TIME</div>
+        <div class="stack">Handle HS classification, bills of lading, and clearance filings. Experience with GCNet or similar customs platforms preferred.</div>
+      </div>
+    </div>
+    <div class="job">
+      <div>
+        <h3>Warehouse Operations Supervisor</h3>
+        <div class="meta">TAKORADI OFFICE · FULL-TIME</div>
+        <div class="stack">Oversee inbound/outbound scheduling and inventory accuracy across the bonded warehouse floor.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block wrap" id="contact" style="border-bottom:none;">
+    <div class="eyebrow">ACCRA – HQ</div>
+    <h2>Get in touch</h2>
+    <p class="sub">General enquiries, quotes, and customer support.</p>
+    <div class="grid-3">
+      <div class="card">
+        <span class="tag">GENERAL</span>
+        <h3>Head Office</h3>
+        <p>12 Liberation Road<br>Accra, Ghana<br>info@meridiancovelogistics.com</p>
+      </div>
+      <div class="card">
+        <span class="tag">TRACKING</span>
+        <h3>Shipment Tracking</h3>
+        <p>Existing customers: <a href="/portal">portal.meridiancovelogistics.com</a><br>support@meridiancovelogistics.com</p>
+      </div>
+      <div class="card">
+        <span class="tag">CAREERS</span>
+        <h3>Recruiting</h3>
+        <p>linda.owusu@meridiancovelogistics.com<br>+233 30 555 0142</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Meridian Cove Logistics Ltd. All rights reserved.</div>
+    <div class="mono">SIMULATED ORGANIZATION — FOR ACADEMIC OSINT/RECON EXERCISE ONLY</div>
+  </div>
+</footer>
+
+</body>
+</html>

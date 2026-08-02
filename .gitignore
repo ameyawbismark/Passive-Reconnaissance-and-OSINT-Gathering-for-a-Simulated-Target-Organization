@@ -1,0 +1,32 @@
+# Secrets & credentials
+*.env
+.env*
+*credentials*
+*secret*
+*.pem
+*.key
+*.pfx
+config/secrets.*
+
+# Captures & large evidence files
+*.pcap
+*.pcapng
+*.zip
+*.tar.gz
+
+# Virtual environments / dependency clutter
+venv/
+.venv/
+__pycache__/
+node_modules/
+*.pyc
+
+# OS/editor clutter
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+# Personal / live data — anything real should never be committed
+*real_ip*
+*live_target*

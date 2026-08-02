@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /internal-portal/
+Disallow: /partner-api/docs/
+Disallow: /wp-admin/
+Allow: /
+
+Sitemap: https://meridiancovelogistics.netlify.app/sitemap.xml
